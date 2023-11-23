@@ -123,7 +123,7 @@ public class BinarySearch {
 
     @Test
     public void test5() {
-        int[] a = {1,2,5,5,5,6,8,9,10};
+        int[] a = {1, 2, 5, 5, 5, 6, 8, 9, 10};
         System.out.println(binarySearchLeftmost1(a, 5));
         System.out.println(binarySearchLeftmost1(a, 9));
 
@@ -163,11 +163,60 @@ public class BinarySearch {
 
     @Test
     public void test6() {
-        int[] a = {1,2,5,5,5,6,8,9,10};
+        int[] a = {1, 2, 5, 5, 5, 6, 8, 9, 10};
         System.out.println(binarySearchRightmost1(a, 5));
         System.out.println(binarySearchRightmost1(a, 9));
 
         System.out.println(binarySearchRightmost1(a, 0));
         System.out.println(binarySearchRightmost1(a, 12));
     }
+
+    /**
+     * 二分查找 Leftmost
+     * Params:  a-待查找的升序数组
+     * target-待查找的目标值
+     * Returns:
+     * 返回 >= target的最靠左索引
+     *
+     * @param a
+     * @param target
+     * @return
+     */
+    public static int binarySearchLeftmost2(int[] a, int target) {
+        int i = 0, j = a.length - 1;
+        while (i <= j) {
+            int m = (i + j) >>> 1;
+            if (target <= a[m]) {
+                j = m - 1;
+            } else {
+                i = m + 1;
+            }
+        }
+        return i;
+    }
+
+    /**
+     * 二分查找 Rightmost
+     * Params:  a-待查找的升序数组
+     * target-待查找的目标值
+     * Returns:
+     * 返回 <= target的最靠右索引
+     *
+     * @param a
+     * @param target
+     * @return
+     */
+    public static int binarySearchRightmost2(int[] a, int target) {
+        int i = 0, j = a.length - 1;
+        while (i <= j) {
+            int m = (i + j) >>> 1;
+            if (target < a[m]) {
+                j = m - 1;
+            } else {
+                i = m + 1;
+            }
+        }
+        return i - 1;
+    }
+
 }
