@@ -1,0 +1,7 @@
+# ignore these folders
+target/
+.idea/
+.settings/
+.vscode/
+bin/
+out/
