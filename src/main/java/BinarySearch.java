@@ -37,11 +37,53 @@ public class BinarySearch {
         System.out.println(binarySearchBasic(a, 74));
 
     }
-
     @Test
     public void test2() {
         int[] a = {7, 13, 21, 30, 38, 45, 46, 74, 89};
         System.out.println(binarySearchBasic(a, 55));
         System.out.println(binarySearchBasic(a, 0));
+    }
+
+
+    /**
+     * 二分查找改动版
+     * Params:  a-待查找的升序数组
+     *          target-待查找的目标值
+     * Returns:
+     *          找到则返回索引
+     *          找不到返回-1
+     * @param a
+     * @param target
+     * @return
+     */
+    public static int binarySearchAlternative(int[] a, int target) {
+        int i = 0, j = a.length ;
+        while (i < j) {
+            int m = (i + j) >>> 1;
+            if (target < a[m]) {
+                j = m ;
+            } else if (a[m] < target) {
+                i = m + 1;
+            } else {
+                return m;
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    public void test3() {
+        int[] a = {7, 13, 21, 30, 38, 45, 46, 74, 89};
+        System.out.println(binarySearchAlternative(a, 7));
+        System.out.println(binarySearchAlternative(a, 13));
+        System.out.println(binarySearchAlternative(a, 30));
+        System.out.println(binarySearchAlternative(a, 74));
+
+    }
+    @Test
+    public void test4() {
+        int[] a = {7, 13, 21, 30, 38, 45, 46, 74, 89};
+        System.out.println(binarySearchAlternative(a, 55));
+        System.out.println(binarySearchAlternative(a, 0));
     }
 }
