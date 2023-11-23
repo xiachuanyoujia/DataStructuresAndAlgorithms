@@ -96,7 +96,7 @@ public class BinarySearch {
      * Params:  a-待查找的升序数组
      * target-待查找的目标值
      * Returns:
-     * 找到则返回索引
+     * 找到则返回最靠左的索引
      * 找不到返回-1
      *
      * @param a
@@ -136,7 +136,7 @@ public class BinarySearch {
      * Params:  a-待查找的升序数组
      * target-待查找的目标值
      * Returns:
-     * 找到则返回索引
+     * 找到则返回最靠右的索引
      * 找不到返回-1
      *
      * @param a
