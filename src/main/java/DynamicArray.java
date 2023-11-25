@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 public class DynamicArray implements Iterable<Integer> {
     private int size = 0;
     private int capacity = 8;
-    private int[] array = new int[capacity];
+    private int[] array = {};
 
     /**
      * 向最后位置[size]添加元素
@@ -40,8 +40,11 @@ public class DynamicArray implements Iterable<Integer> {
      * @throws IllegalArgumentException
      */
     public void add(int index, int element) throws IllegalArgumentException {
+        checkAndGrow();
+
         if (index > size) throw new IllegalArgumentException("index>size越界");
 
+        //添加逻辑
         if (index >= 0 && index < size) {
             System.arraycopy(array, index, array, index + 1, size - index);
         }
@@ -49,9 +52,23 @@ public class DynamicArray implements Iterable<Integer> {
         size++;
     }
 
+    private void checkAndGrow() {
+        //容量检查
+        if (size == 0) {
+            array = new int[capacity];
+        } else if (size == capacity) {
+            //进行扩容，1.5
+            capacity += capacity >> 1;
+            int[] newArray = new int[capacity];
+            System.arraycopy(array, 0, newArray, 0, size);
+            array = newArray;
+        }
+    }
+
     /**
      * 从[0 .. size)范围删除元素
      * Params: index-索引位置
+     * Return: 被删除的元素
      *
      * @param index
      * @return
@@ -184,5 +201,17 @@ public class DynamicArray implements Iterable<Integer> {
         int removed = dynamicArray.remove(2);
         assertEquals(3, removed);
         assertIterableEquals(List.of(1, 2, 4, 5), dynamicArray);
+    }
+
+    @Test
+    public void test6() {
+        DynamicArray dynamicArray = new DynamicArray();
+        for (int i = 0; i < 9; i++) {
+            dynamicArray.addList(i + 1);
+        }
+        assertIterableEquals(
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9),
+                dynamicArray
+        );
     }
 }
