@@ -3,8 +3,12 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 /**
  * 动态数组
@@ -43,6 +47,22 @@ public class DynamicArray implements Iterable<Integer> {
         }
         array[index] = element;
         size++;
+    }
+
+    /**
+     * 从[0 .. size)范围删除元素
+     * Params: index-索引位置
+     *
+     * @param index
+     * @return
+     */
+    public int remove(int index) {
+        int removed = array[index];
+        if (index < size - 1) {
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
+        }
+        size--;
+        return removed;
     }
 
     /**
@@ -147,8 +167,22 @@ public class DynamicArray implements Iterable<Integer> {
         dynamicArray.addList(3);
         dynamicArray.addList(4);
 
-        dynamicArray.stream().forEach(element->{
+        dynamicArray.stream().forEach(element -> {
             System.out.println(element);
         });
+    }
+
+    @Test
+    public void test5() {
+        DynamicArray dynamicArray = new DynamicArray();
+        dynamicArray.addList(1);
+        dynamicArray.addList(2);
+        dynamicArray.addList(3);
+        dynamicArray.addList(4);
+        dynamicArray.addList(5);
+
+        int removed = dynamicArray.remove(2);
+        assertEquals(3, removed);
+        assertIterableEquals(List.of(1, 2, 4, 5), dynamicArray);
     }
 }
