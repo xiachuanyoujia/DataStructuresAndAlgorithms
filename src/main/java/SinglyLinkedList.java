@@ -1,11 +1,35 @@
-import org.w3c.dom.Node;
+import org.junit.jupiter.api.Test;
+import org.w3c.dom.traversal.NodeIterator;
+
+import java.util.Iterator;
+import java.util.function.Consumer;
 
 /**
  * 单向链表
  */
-public class SinglyLinkedList { //整体
+public class SinglyLinkedList implements Iterable<Integer> { //整体
     private Node head = null;  //头指针
 
+    public Iterator<Integer> iterator() {
+        //匿名内部类 -> 带名字的内部类
+        return new NodeIterator();
+    }
+
+    private class NodeIterator implements Iterator<Integer> {
+        Node p = head;
+
+        @Override
+        public boolean hasNext() {  //是否有下一个元素
+            return p != null;
+        }
+
+        @Override
+        public Integer next() { //返回当前值，并指向下一个元素
+            int v = p.value;
+            p = p.next;
+            return v;
+        }
+    }
 
     /**
      * 节点类
@@ -26,11 +50,62 @@ public class SinglyLinkedList { //整体
      *
      * @param value
      */
-    public void addFirst(int value){
+    public void addFirst(int value) {
         //1.链表为空
         //head = new Node(value, null);
         //2.链表非空
         head = new Node(value, head);
     }
+
+    /**
+     * 遍历链表1
+     * Params: consumer -要执行的操作
+     */
+    public void loop1(Consumer<Integer> consumer) {
+        Node p = head;
+        while (p != null) {
+            consumer.accept(p.value);
+            p = p.next;
+        }
+    }
+
+    @Test
+    public void test1() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(4);
+
+//        list.loop1(val -> {
+        list.loop2(val -> {
+            System.out.println(val);
+        });
+    }
+
+    /**
+     * 遍历链表2
+     * Params: consumer -要执行的操作
+     * @param consumer
+     */
+    public void loop2(Consumer<Integer> consumer) {
+        for (Node p = head; p != null; p = p.next) {
+            consumer.accept(p.value);
+        }
+    }
+
+    @Test
+    public void test2() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(4);
+
+        for (Integer value : list) {
+            System.out.println(value);
+        }
+    }
+
 
 }
