@@ -176,10 +176,14 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
     public int get(int index) {
         Node node = findNode(index);
         if (node == null) {
-            throw new IllegalArgumentException(
-                    String.format("index [%d] 不合法%n", index));
+            throw illegalIndex(index);
         }
         return node.value;
+    }
+
+    private IllegalArgumentException illegalIndex(int index) {
+        return new IllegalArgumentException(
+                String.format("index [%d] 不合法%n", index));
     }
 
     @Test
@@ -195,4 +199,35 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
         System.out.println(i);
     }
 
+    /**
+     * 向索引位置插入
+     * Params: index-索引
+     * value-待插入值
+     * Throws: IllegalArgumentException-找不到,抛出index非法异常
+     */
+    public void insert(int index, int value) throws IllegalArgumentException{
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+        Node prev = findNode(index - 1);    //找到上一个节点
+        if (prev == null) { //找不到
+            throw illegalIndex(index);
+        }
+        prev.next = new Node(value, prev.next);
+    }
+
+    @Test
+    public void test5() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addList(1);
+        list.addList(2);
+        list.addList(3);
+        list.addList(4);
+
+        list.insert(0, 5);
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+    }
 }
