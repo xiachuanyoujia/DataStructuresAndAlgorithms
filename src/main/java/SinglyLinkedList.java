@@ -10,6 +10,10 @@ import java.util.function.Consumer;
 public class SinglyLinkedList implements Iterable<Integer> { //整体
     private Node head = null;  //头指针
 
+    /**
+     * 构造器实现遍历
+     * @return
+     */
     public Iterator<Integer> iterator() {
         //匿名内部类 -> 带名字的内部类
         return new NodeIterator();
@@ -86,6 +90,7 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
     /**
      * 遍历链表2
      * Params: consumer -要执行的操作
+     *
      * @param consumer
      */
     public void loop2(Consumer<Integer> consumer) {
