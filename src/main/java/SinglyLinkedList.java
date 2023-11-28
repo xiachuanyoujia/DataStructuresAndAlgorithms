@@ -130,6 +130,7 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
     /**
      * 向链表尾部添加
      * Params: value-待添加值
+     *
      * @param value
      */
     public void addList(int value) {
@@ -153,4 +154,45 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
 
         Assertions.assertIterableEquals(List.of(1, 2, 3, 4), list);
     }
+
+    /**
+     * 根据索引查找
+     * Params: index-索引
+     * Returns:找到,返回该索引位置节点的值
+     * Throws: IllegalArgumentException-找不到,抛出index非法异常
+     * @param index
+     * @return
+     */
+    private Node findNode(int index) {
+        int i = 0;
+        for (Node p = head; p != null; p = p.next, i++) {
+            if (i == index) {
+                return p;
+            }
+        }
+        return null;    //没找到
+    }
+
+    public int get(int index) {
+        Node node = findNode(index);
+        if (node == null) {
+            throw new IllegalArgumentException(
+                    String.format("index [%d] 不合法%n", index));
+        }
+        return node.value;
+    }
+
+    @Test
+    public void test4() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addList(1);
+        list.addList(2);
+        list.addList(3);    //2
+        list.addList(4);
+
+//        int i = list.get(2);
+        int i = list.get(10);
+        System.out.println(i);
+    }
+
 }
