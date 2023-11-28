@@ -127,6 +127,11 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
         return p;
     }
 
+    /**
+     * 向链表尾部添加
+     * Params: value-待添加值
+     * @param value
+     */
     public void addList(int value) {
         Node last = findLast();
 
