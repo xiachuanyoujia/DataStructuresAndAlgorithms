@@ -1,7 +1,9 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.traversal.NodeIterator;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -11,7 +13,8 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
     private Node head = null;  //头指针
 
     /**
-     * 构造器实现遍历
+     * 迭代器实现遍历
+     *
      * @return
      */
     public Iterator<Integer> iterator() {
@@ -112,5 +115,37 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
         }
     }
 
+    private Node findLast() {
+        if (head == null) { //空链表
+            return null;
+        }
 
+        Node p;
+        for (p = head; p.next != null; p = p.next) {
+
+        }
+        return p;
+    }
+
+    public void addList(int value) {
+        Node last = findLast();
+
+        if (last == null) {
+            addFirst(value);
+            return;
+        }
+
+        last.next = new Node(value, null);
+    }
+
+    @Test
+    public void test3() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addList(1);
+        list.addList(2);
+        list.addList(3);
+        list.addList(4);
+
+        Assertions.assertIterableEquals(List.of(1, 2, 3, 4), list);
+    }
 }
