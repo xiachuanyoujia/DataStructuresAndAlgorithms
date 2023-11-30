@@ -160,6 +160,7 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
      * Params: index-索引
      * Returns:找到,返回该索引位置节点的值
      * Throws: IllegalArgumentException-找不到,抛出index非法异常
+     *
      * @param index
      * @return
      */
@@ -205,7 +206,7 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
      * value-待插入值
      * Throws: IllegalArgumentException-找不到,抛出index非法异常
      */
-    public void insert(int index, int value) throws IllegalArgumentException{
+    public void insert(int index, int value) throws IllegalArgumentException {
         if (index == 0) {
             addFirst(value);
             return;
@@ -226,6 +227,36 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
         list.addList(4);
 
         list.insert(0, 5);
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+    }
+
+    /**
+     * 删除第一个
+     * Throws: 1llegalArgumentException--如果不存在,抛出index非法异常
+     */
+    public void removeFirst() {
+        if (head == null) {
+            throw illegalIndex(0);
+        }
+        head = head.next;
+    }
+
+    @Test
+    public void test6() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addList(1);
+        list.addList(2);
+        list.addList(3);
+        list.addList(4);
+
+        list.removeFirst();
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+        System.out.println("==============");
+        list.removeFirst();
         for (Integer val : list) {
             System.out.println(val);
         }
