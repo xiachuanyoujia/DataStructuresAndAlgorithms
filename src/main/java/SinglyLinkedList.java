@@ -261,4 +261,43 @@ public class SinglyLinkedList implements Iterable<Integer> { //整体
             System.out.println(val);
         }
     }
+
+    /**
+     * 从索引位置删除
+     * Params: index-索引
+     * Throws: IllegalArgumentException -找不到,抛出index非法异常
+     */
+    public void remove(int index) {
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
+        Node prev = findNode(index - 1);
+        if (prev == null) {
+            throw illegalIndex(index);
+        }
+        Node removed = prev.next;
+        if (removed == null) {
+            throw illegalIndex(index);
+        }
+        prev.next = removed.next;
+    }
+
+    @Test
+    public void test7() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addList(1);
+        list.addList(2);
+        list.addList(3);
+        list.addList(4);
+
+//        list.remove(2);
+//        list.remove(0);
+//        list.remove(5);
+        list.remove(4);
+
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+    }
 }
