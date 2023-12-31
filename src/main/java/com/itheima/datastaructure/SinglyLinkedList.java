@@ -1,6 +1,7 @@
+package com.itheima.datastaructure;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.traversal.NodeIterator;
 
 import java.util.Iterator;
 import java.util.List;
