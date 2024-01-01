@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DoublyLinkedListSentinel implements Iterable<Integer> {
 
@@ -89,4 +90,41 @@ public class DoublyLinkedListSentinel implements Iterable<Integer> {
         assertIterableEquals(List.of(1, 2, 3, 4, 5), list);
     }
 
+    //删除第一个
+    public void removeFirst() {
+        Node removed = sentinel.next;
+        if (removed == sentinel) {
+            throw new IllegalArgumentException("非法");
+        }
+        Node a = sentinel;
+        Node b = removed.next;
+        a.next = b;
+        b.prev = a;
+    }
+
+    @Test
+    public void testRemoveFirst() {
+        DoublyLinkedListSentinel list = getList();
+        list.removeFirst();
+        assertIterableEquals(List.of(2, 3, 4, 5), list);
+        list.removeFirst();
+        assertIterableEquals(List.of(3, 4, 5), list);
+        list.removeFirst();
+        assertIterableEquals(List.of(4, 5), list);
+        list.removeFirst();
+        assertIterableEquals(List.of(5), list);
+        list.removeFirst();
+        assertIterableEquals(List.of(), list);
+        assertThrows(IllegalArgumentException.class, list::removeFirst);
+    }
+
+    private DoublyLinkedListSentinel getList() {
+        DoublyLinkedListSentinel list = new DoublyLinkedListSentinel();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.addLast(5);
+        return list;
+    }
 }
