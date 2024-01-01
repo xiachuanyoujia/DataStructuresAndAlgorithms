@@ -118,6 +118,33 @@ public class DoublyLinkedListSentinel implements Iterable<Integer> {
         assertThrows(IllegalArgumentException.class, list::removeFirst);
     }
 
+    //删除最后一个
+    public void removeLast() {
+        Node removed = sentinel.prev;
+        if (removed == sentinel) {
+            throw new IllegalArgumentException("非法");
+        }
+        Node a = removed.prev;
+        Node b = sentinel;
+        a.next = b;
+        b.prev = a;
+    }
+    @Test
+    public void testRemoveLast() {
+        DoublyLinkedListSentinel list = getList();
+        list.removeLast();
+        assertIterableEquals(List.of(1,2, 3, 4), list);
+        list.removeLast();
+        assertIterableEquals(List.of(1,2, 3), list);
+        list.removeLast();
+        assertIterableEquals(List.of(1,2), list);
+        list.removeLast();
+        assertIterableEquals(List.of(1), list);
+        list.removeLast();
+        assertIterableEquals(List.of(), list);
+        assertThrows(IllegalArgumentException.class, list::removeLast);
+    }
+
     private DoublyLinkedListSentinel getList() {
         DoublyLinkedListSentinel list = new DoublyLinkedListSentinel();
         list.addLast(1);
@@ -127,4 +154,5 @@ public class DoublyLinkedListSentinel implements Iterable<Integer> {
         list.addLast(5);
         return list;
     }
+
 }
