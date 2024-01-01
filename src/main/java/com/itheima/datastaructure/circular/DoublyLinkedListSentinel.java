@@ -68,6 +68,25 @@ public class DoublyLinkedListSentinel implements Iterable<Integer> {
         assertIterableEquals(List.of(5, 4, 3, 2, 1), list);
     }
 
+    //添加到最后一个
+    //Params: value-待添加值
+    public void addLast(int value) {
+        Node a = sentinel.prev;
+        Node b = sentinel;
+        Node added = new Node(a, value, b);
+        a.next = added;
+        b.prev = added;
+    }
 
+    @Test
+    public void testAddLast() {
+        DoublyLinkedListSentinel list = new DoublyLinkedListSentinel();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.addLast(5);
+        assertIterableEquals(List.of(1, 2, 3, 4, 5), list);
+    }
 
 }
