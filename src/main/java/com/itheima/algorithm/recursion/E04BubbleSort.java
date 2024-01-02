@@ -24,15 +24,16 @@ public class E04BubbleSort {
         if (j == 0) {
             return;
         }
-
+        int x = 0;
         for (int i = 0; i < j; i++) {
             if (a[i] > a[i + 1]) {
                 int t = a[i];
                 a[i] = a[i + 1];
                 a[i + 1] = t;
+                x = i;
             }
         }
-        bubble(a, j - 1);
+        bubble(a, x);
     }
 
     @Test
