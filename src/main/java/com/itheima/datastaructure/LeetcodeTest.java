@@ -8,6 +8,28 @@ import java.util.Stack;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOT100  160.相交链表
+     * 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        ListNode pa = headA, pb = headB;
+
+        while (pa != pb) {
+            pa = (pa != null) ? pa.next : headB;
+            pb = (pb != null) ? pb.next : headA;
+        }
+        return pa;
+    }
+
+    /**
      * leetCode HOT100  141.环形链表
      * 给你一个链表的头节点 head ，判断链表中是否有环。
      * <p>
@@ -19,7 +41,7 @@ public class LeetcodeTest {
      * @return
      */
     public boolean hasCycle(ListNode head) {
-        if (head == null || head.next==null) {
+        if (head == null || head.next == null) {
             return false;
         }
 
@@ -35,7 +57,6 @@ public class LeetcodeTest {
         }
         return true;
     }
-
 
     /**
      * leetCode HOT100  21. 合并两个有序链表
