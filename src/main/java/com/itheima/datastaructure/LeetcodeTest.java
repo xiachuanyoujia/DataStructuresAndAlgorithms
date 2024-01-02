@@ -5,7 +5,21 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Stack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LeetcodeTest {
+
+
+    /**
+     * 给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+     * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+     *
+     * @param nums
+     * @return
+     */
+    public int majorityElement(int[] nums) {
+
+    }
 
     /**
      * leetCode HOT100  160.相交链表
@@ -27,6 +41,39 @@ public class LeetcodeTest {
             pb = (pb != null) ? pb.next : headA;
         }
         return pa;
+    }
+
+    @Test
+    public void testGetIntersectionNode() {
+        // 创建交点
+        ListNode intersectNode = new ListNode(8);
+        intersectNode.next = new ListNode(4);
+        intersectNode.next.next = new ListNode(5);
+
+        // 创建链表A和链表B
+        ListNode headA = new ListNode(4);
+        headA.next = new ListNode(1);
+        headA.next.next = intersectNode;
+
+        ListNode headB = new ListNode(5);
+        headB.next = new ListNode(6);
+        headB.next.next = new ListNode(1);
+        headB.next.next.next = intersectNode;
+
+        // 创建解决方案对象
+        LeetcodeTest solution = new LeetcodeTest();
+
+        // 调用getIntersectionNode方法并验证结果
+        ListNode result = solution.getIntersectionNode(headA, headB);
+
+        // 打印值为1的节点的哈希地址值
+        System.out.println(System.identityHashCode(headA.next));
+        System.out.println(System.identityHashCode(headB.next.next));
+
+        // 打印值为8的节点的哈希地址值
+        System.out.println(System.identityHashCode(intersectNode));
+
+        assertEquals(intersectNode, result);
     }
 
     /**
