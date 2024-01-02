@@ -27,7 +27,9 @@ public class E05InsertionSort {
             i--;
         }
 
-        a[i + 1] = t;
+        if (i + 1 != low) {
+            a[i + 1] = t;
+        }
 
         insertion(a, low + 1);
     }
