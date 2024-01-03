@@ -2,12 +2,54 @@ package com.itheima;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeetcodeTest {
 
+    /**
+     * leetCode HOT100  94.二叉树的中序遍历
+     * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        dfs(res, root);
+        return res;
+    }
+
+    void dfs(List<Integer> res, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(res, root.left);
+        res.add(root.val);
+        dfs(res, root.right);
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
     /**
      * leetCode HOT100  70.爬楼梯
