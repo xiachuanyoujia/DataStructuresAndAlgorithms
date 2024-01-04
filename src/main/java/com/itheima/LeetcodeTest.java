@@ -11,6 +11,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOT100  104.二叉树的最大深度
+     * 给你一个二叉树的根节点 root ，请你返回其最大深度。
+     *
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+    }
+
+    /**
      * leetCode HOT100  101.对称二叉树
      * 给你一个二叉树的根节点 root ，如果二叉树的节点数为偶数，则返回 true ，否则返回 false 。
      *
