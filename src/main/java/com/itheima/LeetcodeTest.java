@@ -11,6 +11,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOT100  101.对称二叉树
+     * 给你一个二叉树的根节点 root ，如果二叉树的节点数为偶数，则返回 true ，否则返回 false 。
+     *
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return dfs(root.left, root.right);
+    }
+
+    boolean dfs(TreeNode lefe, TreeNode right) {
+        if (lefe == null && right == null) {
+            return true;
+        }
+        if (lefe == null || right == null) {
+            return false;
+        }
+        if (lefe.val != right.val) {
+            return false;
+        }
+        return dfs(lefe.left, right.right) && dfs(lefe.right, right.left);
+    }
+
+    /**
      * leetCode HOT100  226.翻转二叉树
      * 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。
      *
