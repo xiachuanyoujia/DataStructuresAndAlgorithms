@@ -2,13 +2,44 @@ package com.itheima;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import javax.swing.tree.TreeNode;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeetcodeTest {
+
+    /**
+     * leetCode HOT100 234. 回文链表
+     * 给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
+     *
+     * @param head
+     * @return
+     */
+    public boolean isPalindrome(ListNode head) {
+        ListNode fast = head, slow = head;
+        ListNode prev = null;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            ListNode temp = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = temp;
+        }
+        if (fast != null) {
+            slow = slow.next;
+        }
+        boolean isPalindrome = true;
+        while (prev != null) {
+            if (slow.val != prev.val) {
+                isPalindrome = false;
+            }
+            prev = prev.next;
+            slow = slow.next;
+        }
+        return isPalindrome;
+    }
+
 
     /**
      * leetCode HOT100  121.买卖股票的最佳时机
