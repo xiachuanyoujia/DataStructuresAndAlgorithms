@@ -10,6 +10,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOT100  543.二叉树的直径
+     * 给你一棵二叉树的根节点，返回该树的 直径 。
+     * <p>
+     * 二叉树的 直径 是指树中任意两个节点之间最长路径的 长度 。这条路径可能经过也可能不经过根节点 root 。
+     * <p>
+     * 两节点之间路径的 长度 由它们之间边数表示。
+     *
+     * @param root
+     * @return
+     */
+    int ans = 1;
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        int ans = 1;
+        dept(root);
+        return ans - 1;
+    }
+
+    int dept(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = dept(root.left);
+        int r = dept(root.right);
+        ans = Math.max(ans, l + r + 1);
+        return Math.max(l, r) + 1;
+    }
+
+
+    /**
      * leetCode HOT100  283. 移动零
      * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
      * <p>
