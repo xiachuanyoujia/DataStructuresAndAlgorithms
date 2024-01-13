@@ -31,7 +31,7 @@ public class E01Leetcode102 {
         queue.offer(root);
         while (!queue.isEmpty()) {
             TreeNode n = queue.poll();
-            System.out.println(n);
+            System.out.print(n + " ");
             if (n.left != null) {
                 queue.offer(n.left);
             }
