@@ -14,7 +14,7 @@ public class ArrayStack<E> implements Stack<E>, Iterable<E> {
 
     @Override
     public boolean push(E value) {
-        if (isEmpty()) {
+        if (isFull()) {
             return false;
         }
         array[top++] = value;
@@ -23,7 +23,7 @@ public class ArrayStack<E> implements Stack<E>, Iterable<E> {
 
     @Override
     public E pop() {
-        if (isFull()) {
+        if (isEmpty()) {
             return null;
         }
         return array[--top];
@@ -31,7 +31,7 @@ public class ArrayStack<E> implements Stack<E>, Iterable<E> {
 
     @Override
     public E peek() {
-        if (isFull()) {
+        if (isEmpty()) {
             return null;
         }
         return array[top - 1];
