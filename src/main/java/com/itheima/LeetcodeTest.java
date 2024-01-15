@@ -10,6 +10,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetcode HOT100  3. 无重复字符的最长子串
+     * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) return 0;
+        int left = 0, right = 0, max = 0;
+        int[] count = new int[256]; // 创建一个数组来存储每个字符出现的次数
+        char[] chars = s.toCharArray();
+
+        while (right < s.length()) {
+            char c = chars[right];
+            count[c] += 1;
+            right++;
+            while (count[c] > 1) {
+                max = Math.max(max, right - left - 1);
+                char charLeft = chars[left];
+                left++;
+                count[charLeft] -= 1;
+            }
+        }
+        return Math.max(right - left, max);
+    }
+
+    @Test
+    public void TestLengthOfLongestSubstring() {
+        LeetcodeTest leetcodeTest = new LeetcodeTest();
+        System.out.println(leetcodeTest.lengthOfLongestSubstring("asdacxfrqwdadd"));
+    }
+
+    /**
      * leetCode 142. 环形链表 II
      * 给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
      * <p>
