@@ -10,6 +10,50 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetcode  HOT100  4. 寻找两个正序数组的中位数
+     * 给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int sum = nums1.length + nums2.length;
+        int middel = sum / 2;
+        int p1 = 0, p2 = 0;
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i <= middel; i++) {
+            if (p1 >= nums1.length) {
+                list.add(nums2[p2]);
+                p2++;
+            } else if (p2 >= nums2.length) {
+                list.add(nums1[p1]);
+                p1++;
+            } else if (nums1[p1] < nums2[p2]) {
+                list.add(nums1[p1]);
+                p1++;
+            } else {
+                list.add(nums2[p2]);
+                p2++;
+            }
+        }
+
+        if (sum % 2 == 0) {//偶数
+            double res = ((double) list.get(middel - 1) + (double) list.get(middel)) / 2;
+            return res;
+        }
+        double res = list.get(middel);
+        return res;
+    }
+
+    @Test
+    public void testFindMedianSortedArrays() {
+        LeetcodeTest l = new LeetcodeTest();
+        System.out.println(l.findMedianSortedArrays(new int[]{}, new int[]{2, 3}));
+    }
+
+    /**
      * leetcode HOT100  3. 无重复字符的最长子串
      * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
      *
