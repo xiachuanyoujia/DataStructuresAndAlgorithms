@@ -10,8 +10,63 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetcode HOT100  5. 最长回文子串
+     * 给你一个字符串 s，找到 s 中最长的回文子串。
+     * <p>
+     * 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
+     *
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        if (s.length() == 0)
+            return "";
+
+        char[] charArray = s.toCharArray();
+
+        int left = 0;
+        int right = 0;
+        int len = 1;
+        int maxLength = 1;
+        int maxLeft = 0;
+        int maxRight = 0;
+
+        for (int i = 0; i < charArray.length; i++) {
+            left = i - 1;
+            right = i + 1;
+            while (left >= 0 && charArray[left] == charArray[i]) {
+                left--;
+                len++;
+            }
+            while (right < charArray.length && charArray[right] == charArray[i]) {
+                right++;
+                len++;
+            }
+            while (left >= 0 && right < charArray.length && charArray[left] == charArray[right]) {
+                left--;
+                right++;
+                len += 2;
+            }
+            if (len > maxLength) {
+                maxLength = len;
+                maxLeft = left + 1;
+                maxRight = right - 1;
+            }
+            len = 1;
+        }
+        return s.substring(maxLeft, maxRight + 1);
+    }
+
+    @Test
+    public void testLongestPalindrome() {
+        LeetcodeTest l = new LeetcodeTest();
+        l.longestPalindrome("dasadaqw");
+    }
+
+    /**
      * leetcode HOT100  102. 二叉树的层序遍历
      * 给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。
+     *
      * @param root
      * @return
      */
