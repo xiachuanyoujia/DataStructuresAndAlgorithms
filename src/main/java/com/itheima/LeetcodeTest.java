@@ -10,6 +10,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetcode HOT100  617. 合并二叉树
+     *
+     * @param root1
+     * @param root2
+     * @return
+     */
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return null;
+        }
+        if (root1 == null) {
+            return root2;
+        }
+        if (root2 == null) {
+            return root1;
+        }
+
+        TreeNode merge = new TreeNode(root1.val + root2.val);
+        merge.left = mergeTrees(root1.left, root2.left);
+        merge.right = mergeTrees(root1.right, root2.right);
+        return merge;
+    }
+
+    /**
      * leetcode HOT100  5. 最长回文子串
      * 给你一个字符串 s，找到 s 中最长的回文子串。
      * <p>
