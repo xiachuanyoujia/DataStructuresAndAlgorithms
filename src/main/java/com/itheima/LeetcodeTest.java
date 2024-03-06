@@ -1,13 +1,43 @@
 package com.itheima;
 
+import com.sun.tools.javac.Main;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.tree.TreeNode;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeetcodeTest {
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        binaryToDecimal();
+    }
+
+    /**
+     * 二进制转十进制
+     */
+    public static void binaryToDecimal() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个二进制数字：");
+        String str = scanner.nextLine();
+        if (!str.matches("[01]+")) {
+            System.out.println("输入的不是二进制数字");
+            return;
+        }
+//        int res = Integer.parseInt(str, 2);
+//        System.out.println("十进制：" + res);
+        int decimal = 0;
+        int length = str.length();
+        for (int i = 0; i < length; i++) {
+            char c = str.charAt(length - 1 - i);
+            if (c == '1') {
+                decimal += Math.pow(2, i);
+            }
+        }
+        System.out.println("十进制：" + decimal);
+        scanner.close();
+    }
 
     /**
      * leetcode HOT100  617. 合并二叉树
