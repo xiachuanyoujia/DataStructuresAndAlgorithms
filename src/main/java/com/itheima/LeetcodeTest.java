@@ -10,6 +10,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetcood HOP100  17. 电话号码的字母组合
+     * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
+     * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+     *
+     * @param digits
+     * @return
+     */
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> res = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        String[] numString = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+        if (digits == null || digits.length() == 0) {
+            return res;
+        }
+        backtraking(digits, 0, res, sb, numString);
+        return res;
+    }
+
+    private void backtraking(String disgits, int num, LinkedList<String> res, StringBuilder sb, String[] numString) {
+        if (num == disgits.length()) {
+            res.add(sb.toString());
+            return;
+        }
+        String curStr = numString[disgits.charAt(num) - '0'];
+        for (int i = 0; i < curStr.length(); i++) {
+            sb.append(curStr.charAt(i));
+            backtraking(disgits, num + 1, res, sb, numString);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+
+    /**
      * leetcood HOP100 11. 盛最多水的容器
      * <p>
      * 给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
