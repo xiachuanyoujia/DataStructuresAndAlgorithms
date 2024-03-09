@@ -10,7 +10,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
-     * leetcood HOP100  17. 电话号码的字母组合
+     * leetCode HOT100  22. 括号生成
+     * 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+     *
+     * @param n
+     * @return
+     */
+    public List<String> generateParenthesis(int n) {
+        if (n == 0) {
+            return new ArrayList<>();
+        }
+        List<String> res = new ArrayList<>();
+        backtracking("", 0, 0, n, res);
+        return res;
+    }
+
+    private void backtracking(String str, int left, int right, int n, List<String> res) {
+        if (left == n && right == n) {
+            res.add(str);
+            return;
+        }
+        if (left < right) {
+            return;
+        }
+        if (left < n) {
+            backtracking(str + "(", left + 1, right, n, res);
+        }
+        if (right < n) {
+            backtracking(str + ")", left, right + 1, n, res);
+        }
+    }
+
+    /**
+     * leetCode HOP100  17. 电话号码的字母组合
      * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
      * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
      *
@@ -44,7 +76,7 @@ public class LeetcodeTest {
 
 
     /**
-     * leetcood HOP100 11. 盛最多水的容器
+     * leetCode HOP100 11. 盛最多水的容器
      * <p>
      * 给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
      * 找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
@@ -110,7 +142,7 @@ public class LeetcodeTest {
     }
 
     /**
-     * leetcode HOT100  617. 合并二叉树
+     * leetCode HOT100  617. 合并二叉树
      *
      * @param root1
      * @param root2
@@ -134,7 +166,7 @@ public class LeetcodeTest {
     }
 
     /**
-     * leetcode HOT100  5. 最长回文子串
+     * leetCode HOT100  5. 最长回文子串
      * 给你一个字符串 s，找到 s 中最长的回文子串。
      * <p>
      * 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
@@ -188,7 +220,7 @@ public class LeetcodeTest {
     }
 
     /**
-     * leetcode HOT100  102. 二叉树的层序遍历
+     * leetCode HOT100  102. 二叉树的层序遍历
      * 给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。
      *
      * @param root
@@ -263,7 +295,7 @@ public class LeetcodeTest {
     }
 
     /**
-     * leetcode HOT100  3. 无重复字符的最长子串
+     * leetCode HOT100  3. 无重复字符的最长子串
      * 给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。
      *
      * @param s
