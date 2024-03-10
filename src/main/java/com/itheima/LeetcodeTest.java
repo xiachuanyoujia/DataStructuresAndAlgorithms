@@ -10,6 +10,65 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  39. 组合总和
+     * 给你一个 无重复元素 的整数数组 candidates 和一个目标整数 target ，找出 candidates 中可以使数字和为目标数 target 的 所有 不同组合 ，并以列表形式返回。你可以按 任意顺序 返回这些组合。
+     * candidates 中的 同一个 数字可以 无限制重复被选取 。如果至少一个数字的被选数量不同，则两种组合是不同的。
+     * 对于给定的输入，保证和为 target 的不同组合数少于 150 个。
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        int len = candidates.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (len == 0) {
+            return res;
+        }
+        //排序方便剪枝
+        Arrays.sort(candidates);
+        ArrayDeque<Integer> path = new ArrayDeque<>();
+        dfs(candidates, 0, len, target, path, res);
+        return res;
+    }
+
+    private void dfs(int[] candidates, int start, int len, int target, ArrayDeque<Integer> path, List<List<Integer>> res) {
+        if (target == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = start; i < len; i++) {
+            //剪枝
+            if (target - candidates[i] < 0) {
+                break;
+            }
+            path.addLast(candidates[i]);
+            dfs(candidates, i, len, target - candidates[i], path, res);
+            path.removeLast();
+        }
+    }
+
+    @Test
+    public void testCombinationSum() {
+        LeetcodeTest leetcodeTest = new LeetcodeTest();
+
+        int[] candidates1 = {2,3,6,7};
+        int target1 = 7;
+        List<List<Integer>> expected1 = new ArrayList<>();
+        expected1.add(Arrays.asList(2, 2, 3));
+        expected1.add(Arrays.asList(7));
+        assertEquals(expected1, leetcodeTest.combinationSum(candidates1, target1));
+
+        int[] candidates2 = {2,3,5};
+        int target2 = 8;
+        List<List<Integer>> expected2 = new ArrayList<>();
+        expected2.add(Arrays.asList(2, 2, 2, 2));
+        expected2.add(Arrays.asList(2, 3, 3));
+        expected2.add(Arrays.asList(3, 5));
+        assertEquals(expected2, leetcodeTest.combinationSum(candidates2, target2));
+    }
+
+    /**
      * leetCode HOT100  22. 括号生成
      * 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
      *
@@ -112,7 +171,7 @@ public class LeetcodeTest {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+//        Main main = new Main();
         binaryToDecimal();
     }
 
