@@ -1,6 +1,5 @@
 package com.itheima;
 
-import com.sun.tools.javac.Main;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -8,6 +7,44 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LeetcodeTest {
+
+    /**
+     * leetCode HOP100  46. 全排列
+     * 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        if (nums.length == 0) {
+            return res;
+        }
+        ArrayDeque<Integer> list = new ArrayDeque<>();
+
+        HashMap<Integer, Boolean> visited = new HashMap<Integer, Boolean>();
+        for (int num : nums) {
+            visited.put(num, false);
+        }
+        backtracking(nums, res, list);
+        return res;
+    }
+
+    private void backtracking(int[] nums, List<List<Integer>> res, ArrayDeque<Integer> list) {
+        if (list.size() == nums.length) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (list.contains(nums[i])) {
+                continue;
+            }
+            list.addLast(nums[i]);
+            backtracking(nums, res, list);
+            list.removeLast();
+        }
+    }
 
     /**
      * leetCode HOP100  39. 组合总和
@@ -52,14 +89,14 @@ public class LeetcodeTest {
     public void testCombinationSum() {
         LeetcodeTest leetcodeTest = new LeetcodeTest();
 
-        int[] candidates1 = {2,3,6,7};
+        int[] candidates1 = {2, 3, 6, 7};
         int target1 = 7;
         List<List<Integer>> expected1 = new ArrayList<>();
         expected1.add(Arrays.asList(2, 2, 3));
         expected1.add(Arrays.asList(7));
         assertEquals(expected1, leetcodeTest.combinationSum(candidates1, target1));
 
-        int[] candidates2 = {2,3,5};
+        int[] candidates2 = {2, 3, 5};
         int target2 = 8;
         List<List<Integer>> expected2 = new ArrayList<>();
         expected2.add(Arrays.asList(2, 2, 2, 2));
