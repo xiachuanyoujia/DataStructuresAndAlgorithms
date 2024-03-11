@@ -17,34 +17,31 @@ public class LeetcodeTest {
      */
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-
         if (nums.length == 0) {
             return res;
         }
-        ArrayDeque<Integer> list = new ArrayDeque<>();
-
-        HashMap<Integer, Boolean> visited = new HashMap<Integer, Boolean>();
-        for (int num : nums) {
-            visited.put(num, false);
-        }
-        backtracking(nums, res, list);
+        ArrayDeque<Integer> path = new ArrayDeque<>(nums.length);
+        boolean[] used = new boolean[nums.length];
+        dfs(nums, nums.length, 0, path, used, res);
         return res;
     }
 
-    private void backtracking(int[] nums, List<List<Integer>> res, ArrayDeque<Integer> list) {
-        if (list.size() == nums.length) {
-            res.add(new ArrayList<>(list));
+    private void dfs(int[] nums, int length, int depth, ArrayDeque<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (depth == length) {
+            res.add(new ArrayList<>(path));
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
-            if (list.contains(nums[i])) {
-                continue;
+        for (int i = 0; i < length; i++) {
+            if (!used[i]) {
+                path.addLast(nums[i]);
+                used[i] = true;
+                dfs(nums, nums.length, depth + 1, path, used, res);
+                used[i] = false;
+                path.removeLast();
             }
-            list.addLast(nums[i]);
-            backtracking(nums, res, list);
-            list.removeLast();
         }
     }
+
 
     /**
      * leetCode HOP100  39. 组合总和
