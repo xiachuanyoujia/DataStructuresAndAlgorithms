@@ -9,6 +9,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  55. 跳跃游戏
+     * 给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。
+     * 判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false 。
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canJump(int[] nums) {
+        int cover = 0;
+        if (nums.length == 1) {
+            return true;
+        }
+        for (int i = 0; i <= cover; i++) {
+            cover = Math.max(i + nums[i], cover);
+            if (cover >= nums.length - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * leetCode HOP100 48. 旋转图像
      * 给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
      * 你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
@@ -27,8 +49,8 @@ public class LeetcodeTest {
                 matrix[nums - 1 - j][nums - 1 - i] = temp;
             }
         }
-        for(int i=0;i<(nums>>1);i++){
-            for(int j=0;j<nums;j++){
+        for (int i = 0; i < (nums >> 1); i++) {
+            for (int j = 0; j < nums; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[nums - 1 - i][j];
                 matrix[nums - 1 - i][j] = temp;
