@@ -9,6 +9,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  56. 合并区间
+     * 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi]。
+     * 请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+     *
+     * @param intervals
+     * @return
+     */
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
+        List<int[]> list = new ArrayList<>();
+        int L = intervals[0][0], R = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] > R) {
+                list.add(new int[]{L, R});
+                L = intervals[i][0];
+                R = intervals[i][1];
+            } else {
+                R = Math.max(R, intervals[i][1]);
+            }
+        }
+        list.add(new int[]{L, R});
+        return list.toArray(new int[0][]);
+    }
+
+    /**
      * leetCode HOP100  55. 跳跃游戏
      * 给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。
      * 判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false 。
