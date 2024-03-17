@@ -9,6 +9,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100 75. 颜色分类
+     * 给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+     * 我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+     * 必须在不使用库内置的 sort 函数的情况下解决这个问题。
+     *
+     * @param nums
+     */
+    public void sortColors(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        int i = 0, j = 0, k = nums.length - 1;
+        while (j <= k) {
+            if (nums[j] == 0) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+                j++;
+            } else if (nums[j] == 2) {
+                int temp = nums[j];
+                nums[j] = nums[k];
+                nums[k] = temp;
+                k--;
+            } else {
+                j++;
+            }
+        }
+    }
+
+    /**
      * leetCode HOP100  64. 最小路径和
      * 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
      * 说明：每次只能向下或者向右移动一步。
