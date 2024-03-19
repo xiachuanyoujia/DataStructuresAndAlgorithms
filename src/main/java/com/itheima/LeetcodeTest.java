@@ -9,6 +9,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100 96. 不同的二叉搜索树
+     * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？返回满足题意的二叉搜索树的种数
+     *
+     * @param n
+     * @return
+     */
+    public int numTrees(int n) {
+        int[] G = new int[n + 1];
+        G[0] = 1;
+        G[1] = 1;
+        for (int i = 2; i <= n; ++i) {
+            for (int j = 1; j <= i; ++j) {
+                G[i] += G[j - 1] * G[i - j];
+            }
+        }
+        return G[n];
+    }
+
+    /**
      * leetCode HOP100 148. 排序链表
      * 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表
      * 在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序
@@ -36,7 +55,7 @@ public class LeetcodeTest {
             if (left.val < right.val) {
                 h.next = left;
                 left = left.next;
-            }else {
+            } else {
                 h.next = right;
                 right = right.next;
             }
