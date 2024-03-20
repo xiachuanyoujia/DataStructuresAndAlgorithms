@@ -9,6 +9,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100 114. 二叉树展开为链表
+     * 给你二叉树的根结点 root ，请你将它展开为一个单链表：
+     * 展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。
+     * 展开后的单链表应该与二叉树 先序遍历 顺序相同。
+     *
+     * @param root
+     */
+    public void flatten(TreeNode root, TreeNode pre) {
+        if (root == null) {
+            return;
+        }
+        flatten(root.right, pre);
+        flatten(root.left, pre);
+        root.right = pre;
+        root.left = null;
+        pre = root;
+//        System.out.println(root.val);
+//        System.out.println("pre:"+ pre.val);
+    }
+
+    @Test
+    public void testFlatten() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(6);
+        flatten(root, null);
+    }
+
+    /**
      * leetCode HOP100 96. 不同的二叉搜索树
      * 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？返回满足题意的二叉搜索树的种数
      *
