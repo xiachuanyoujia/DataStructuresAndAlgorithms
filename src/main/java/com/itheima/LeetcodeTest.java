@@ -9,6 +9,53 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  215. 数组中的第K个最大元素
+     * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
+     * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+     * 你必须设计并实现时间复杂度为 O(n) 的算法解决此问题。
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargest(int[] nums, int k) {
+        return quickSelect(nums, 0, nums.length - 1, k);
+    }
+
+    private int quickSelect(int[] nums, int start, int end, int k) {
+        int pivot = nums[start + (end - start) / 2];
+        int i = start, j = end;
+        while (i <= j) {
+            while (i <= j && nums[i] > pivot) {
+                i++;
+            }
+            while (i <= j && nums[j] < pivot) {
+                j--;
+            }
+            if (i <= j) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        if (start + k - 1 <= j) {
+            return quickSelect(nums, start, j, k);
+        }
+        if (start + k - 1 >= i) {
+            return quickSelect(nums, i, end, k - (i - start));
+        }
+        return nums[j + 1];
+    }
+
+    @Test
+    public void testfindKthLargest() {
+        int[] ints = {1, 3, 54, 7, 23, 45, 90};
+        System.out.println(findKthLargest(ints, 2));
+    }
+
+    /**
      * leetCode HOP100 114. 二叉树展开为链表
      * 给你二叉树的根结点 root ，请你将它展开为一个单链表：
      * 展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。
