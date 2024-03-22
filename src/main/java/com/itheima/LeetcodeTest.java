@@ -9,6 +9,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  236. 二叉树的最近公共祖先
+     * 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+     * 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+     *
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return root;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left == null && right != null) {
+            return right;
+        }
+        if (left != null && right == null) {
+            return left;
+        }
+        return null;
+    }
+
+    /**
      * leetCode HOP100  215. 数组中的第K个最大元素
      * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
      * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
