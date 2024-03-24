@@ -9,6 +9,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * leetCode HOP100  240. 搜索二维矩阵 II
+     * 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+     * 每行的元素从左到右升序排列。
+     * 每列的元素从上到下升序排列
+     *
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int i = matrix.length - 1, j = 0;
+        while (i >= 0 && j < matrix[0].length) {
+            if(matrix[i][j]>target) i--;
+            else if(matrix[i][j]<target) j++;
+            else return true;
+        }
+        return false;
+    }
+
+    /**
      * leetCode HOP100  238. 除自身以外数组的乘积
      * 给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积 。
      * 题目数据 保证 数组 nums之中任意元素的全部前缀元素和后缀的乘积都在  32 位 整数范围内。
