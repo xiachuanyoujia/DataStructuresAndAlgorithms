@@ -2,11 +2,39 @@ package com.itheima.interviewQuestion;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class easy {
+
+    /**
+     * 面试题 01.03. URL化
+     * URL化。编写一种方法，将字符串中的空格全部替换为%20。假定该字符串尾部有足够的空间存放新增字符，并且知道字符串的“真实”长度。
+     * （注：用Java实现的话，请使用字符数组实现，以便直接在数组上操作。）
+     *
+     * @param S
+     * @param length
+     * @return
+     */
+    public String replaceSpaces(String S, int length) {
+        char[] c = S.toCharArray();
+        int len = c.length - 1;
+        for (int i = length - 1; i >= 0; i--) {
+            if (c[i] == ' ') {
+                c[len--] = '0';
+                c[len--] = '2';
+                c[len--] = '%';
+            } else {
+                c[len--] = c[i];
+            }
+        }
+        return new String(c, len + 1, c.length - 1 - len);
+    }
+
+    @Test
+    public void replaceSpacesTest() {
+        easy easy = new easy();
+        easy.replaceSpaces("Mr John Smith    ", 13);
+    }
 
     /**
      * 面试题 01.02. 判定是否互为字符重排
