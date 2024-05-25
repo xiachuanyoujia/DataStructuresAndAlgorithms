@@ -7,6 +7,39 @@ import java.util.*;
 public class easy {
 
     /**
+     * 面试题 01.04. 回文排列
+     * 给定一个字符串，编写一个函数判定其是否为某个回文串的排列之一。
+     * 回文串是指正反两个方向都一样的单词或短语。排列是指字母的重新排列。
+     * 回文串不一定是字典当中的单词。
+     *
+     * @param s
+     * @return
+     */
+    public boolean canPermutePalindrome(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (!set.contains(s.charAt(i))) {
+                set.add(s.charAt(i));
+            } else {
+                set.remove(s.charAt(i));
+            }
+        }
+        int odd = 0;
+        for (Character c : set) {
+            if (++odd > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void canPermutePalindromeTest() {
+        easy easy = new easy();
+        easy.canPermutePalindrome("aab");
+    }
+
+    /**
      * 面试题 01.03. URL化
      * URL化。编写一种方法，将字符串中的空格全部替换为%20。假定该字符串尾部有足够的空间存放新增字符，并且知道字符串的“真实”长度。
      * （注：用Java实现的话，请使用字符数组实现，以便直接在数组上操作。）
