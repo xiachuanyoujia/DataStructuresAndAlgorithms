@@ -7,6 +7,36 @@ import java.util.*;
 public class easy {
 
     /**
+     * 面试题 01.07. 旋转矩阵
+     * 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
+     * 不占用额外内存空间能否做到？
+     *
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        int len = matrix.length;
+        for (int i = 0; i < (len / 2); i++) {
+            for (int j = 0; j < ((len + 1) / 2); j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[len - 1 - j][i];
+                matrix[len - 1 - j][i] = matrix[len - 1 - i][len - 1 - j];
+                matrix[len - 1 - i][len - 1 - j] = matrix[j][len - 1 - i];
+                matrix[j][len - 1 - i] = temp;
+            }
+        }
+    }
+
+    @Test
+    public void rotateTest() {
+        easy easy = new easy();
+        easy.rotate(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        });
+    }
+
+    /**
      * 面试题 01.05. 一次编辑
      * 字符串有三种编辑操作:插入一个英文字符、删除一个英文字符或者替换一个英文字符。 给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
      *
