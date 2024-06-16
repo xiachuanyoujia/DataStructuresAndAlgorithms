@@ -5,6 +5,30 @@ import org.junit.jupiter.api.Test;
 public class dpTest {
 
     /**
+     * 343. 整数拆分
+     *
+     * @param n
+     * @return
+     */
+    public int integerBreak(int n) {
+        int[] dp = new int[n + 1];
+        dp[2] = 1;
+        for(int i=3;i<=n;i++){
+            for(int j=1;j<=i-j;j++){
+                dp[i] = Math.max(dp[i], Math.max(j * (i - j), j * dp[i - j]));
+            }
+        }
+
+        System.out.println(dp);
+        return dp[n];
+    }
+
+    @Test
+    public void testIntegerBreak() {
+        integerBreak(4);
+    }
+
+    /**
      * 63. 不同路径 II
      *
      * @param obstacleGrid
