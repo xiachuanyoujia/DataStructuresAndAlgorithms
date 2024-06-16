@@ -5,6 +5,30 @@ import org.junit.jupiter.api.Test;
 public class dpTest {
 
     /**
+     * 96. 不同的二叉搜索树
+     *
+     * @param n
+     * @return
+     */
+    public int numTrees(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                dp[i] += dp[j - 1] * dp[i - j];
+            }
+        }
+        System.out.println(dp);
+        return dp[n];
+    }
+
+    @Test
+    public void testNumTrees() {
+        numTrees(6);
+    }
+
+    /**
      * 343. 整数拆分
      *
      * @param n
@@ -13,8 +37,8 @@ public class dpTest {
     public int integerBreak(int n) {
         int[] dp = new int[n + 1];
         dp[2] = 1;
-        for(int i=3;i<=n;i++){
-            for(int j=1;j<=i-j;j++){
+        for (int i = 3; i <= n; i++) {
+            for (int j = 1; j <= i - j; j++) {
                 dp[i] = Math.max(dp[i], Math.max(j * (i - j), j * dp[i - j]));
             }
         }
