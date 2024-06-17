@@ -5,6 +5,30 @@ import org.junit.jupiter.api.Test;
 public class dpTest {
 
     /**
+     * NC145 01背包
+     *
+     * @param V
+     * @param n
+     * @param vw
+     * @return
+     */
+    public int knapsack(int V, int n, int[][] vw) {
+        // write code here
+
+        int[][] dp = new int[n + 1][V + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= V; j++) {
+                if (j < vw[i - 1][0]) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - vw[i - 1][0]] + vw[i - 1][1]);
+                }
+            }
+        }
+        return dp[n][V];
+    }
+
+    /**
      * 96. 不同的二叉搜索树
      *
      * @param n
