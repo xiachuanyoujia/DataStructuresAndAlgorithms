@@ -14,18 +14,32 @@ public class dpTest {
      */
     public int knapsack(int V, int n, int[][] vw) {
         // write code here
-
         int[][] dp = new int[n + 1][V + 1];
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= V; j++) {
+                System.out.println(dp);
                 if (j < vw[i - 1][0]) {
                     dp[i][j] = dp[i - 1][j];
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - vw[i - 1][0]] + vw[i - 1][1]);
                 }
+                System.out.println(dp);
             }
         }
+        System.out.println(dp);
         return dp[n][V];
+    }
+
+    @Test
+    public void testKnapsack() {
+        int capacity = 10; // 背包最大容量
+        int itemCount = 3; // 物品数量
+        int[][] itemsValueWeight = { // 物品价值和重量数组
+                {2, 3}, // 物品1: 重量2, 价值3
+                {3, 4}, // 物品2: 重量3, 价值4
+                {4, 5}  // 物品3: 重量4, 价值5
+        };
+        knapsack(capacity, itemCount, itemsValueWeight);
     }
 
     /**
