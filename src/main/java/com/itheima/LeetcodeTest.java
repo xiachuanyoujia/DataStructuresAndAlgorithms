@@ -9,6 +9,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 1. 两数之和
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] res = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            int c = nums[i];
+            int temp = target - c;
+            if (map.containsKey(temp)) {
+                res[0] = map.get(temp);
+                res[1] = i;
+                return res;
+            }
+            if (!map.containsKey(c)) {
+                map.put(c, i);
+            }
+        }
+        return res;
+    }
+
+    @Test
+    public void twoSumTest() {
+        twoSum(new int[]{3, 2, 4}, 6);
+    }
+
+    /**
      * 349. 两个数组的交集
      *
      * @param nums1
