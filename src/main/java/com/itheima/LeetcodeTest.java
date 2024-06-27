@@ -9,6 +9,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 242. 有效的字母异位词
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public boolean isAnagram(String s, String t) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!map.containsKey(c)) {
+                map.put(c, 1);
+            } else {
+                map.put(c, map.get(c) + 1);
+            }
+        }
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            if (!map.containsKey(c)) {
+                return false;
+            } else {
+                if (map.get(c) == 1) {
+                    map.remove(c);
+                } else {
+                    map.put(c, map.get(c) - 1);
+                }
+            }
+        }
+        return map.isEmpty();
+    }
+
+    /**
      * leetCode HOP100 309. 买卖股票的最佳时机含冷冻期
      * 给定一个整数数组prices，其中第  prices[i] 表示第 i 天的股票价格 。​
      * 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
