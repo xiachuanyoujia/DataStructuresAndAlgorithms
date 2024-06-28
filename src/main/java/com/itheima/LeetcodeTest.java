@@ -9,6 +9,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 454. 四数相加 II
+     *
+     * @param nums1
+     * @param nums2
+     * @param nums3
+     * @param nums4
+     * @return
+     */
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        HashMap<Integer, Integer> map1 = new HashMap<>();
+        int n = nums1.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int sum = nums1[i] + nums2[j];
+                map1.put(sum, map1.getOrDefault(sum, 0) + 1);
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int target = -(nums3[i] + nums4[j]);
+                if (map1.containsKey(target)) {
+                    res += map1.get(target);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
      * 1. 两数之和
      *
      * @param nums
