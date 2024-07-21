@@ -9,6 +9,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 344. 反转字符串
+     *
+     * @param s
+     */
+    public void reverseString(char[] s) {
+        if (s == null && s.length == 1)
+            return;
+        int l = 0, r = s.length - 1;
+        while (l < r) {
+            char temp = s[l];
+            s[l++] = s[r];
+            s[r--] = temp;
+        }
+    }
+
+    /**
      * 15. 三数之和
      *
      * @param nums
