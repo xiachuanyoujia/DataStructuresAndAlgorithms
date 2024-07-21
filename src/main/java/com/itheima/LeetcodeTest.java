@@ -9,6 +9,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 541. 反转字符串 II
+     *
+     * @param s
+     * @param k
+     * @return
+     */
+    public String reverseStr(String s, int k) {
+        char[] ch = s.toCharArray();
+        for (int i = 0; i < ch.length; i += 2 * k) {
+            int star = i;
+            int end = Math.min(ch.length - 1, star + k - 1);
+            while (star < end) {
+                char temp = ch[star];
+                ch[star++] = ch[end];
+                ch[end--] = temp;
+            }
+        }
+        return new String(ch);
+    }
+
+    /**
      * 344. 反转字符串
      *
      * @param s
