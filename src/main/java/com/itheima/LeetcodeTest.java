@@ -9,6 +9,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 151. 反转字符串中的单词
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        char[] initialArr = s.toCharArray();
+        char[] newArr = new char[initialArr.length + 1];
+        int newArrPos = 0;
+        int i = initialArr.length - 1;
+        while (i >= 0) {
+            while (i >= 0 && initialArr[i] == ' ') i--;
+            int right = i;
+            while (i >= 0 && initialArr[i] != ' ') i--;
+            for (int j = i + 1; j <= right; j++) {
+                newArr[newArrPos++] = initialArr[j];
+                if (j == right) {
+                    newArr[newArrPos++] = ' ';
+                }
+            }
+        }
+        if (newArrPos == 0) {
+            return "";
+        } else {
+            return new String(newArr, 0, newArrPos - 1);
+        }
+    }
+
+    /**
      * 541. 反转字符串 II
      *
      * @param s
