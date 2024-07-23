@@ -9,6 +9,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 739. 每日温度
+     *
+     * @param temperatures
+     * @return
+     */
+    public int[] dailyTemperatures(int[] temperatures) {
+        Deque<Integer> st = new LinkedList<>();
+        int[] res = new int[temperatures.length];
+        st.push(0);
+        for (int i = 1; i < temperatures.length; i++) {
+            if (temperatures[i] <= temperatures[st.peek()]) {
+                st.push(i);
+            } else {
+                while (!st.isEmpty() && temperatures[i] > temperatures[st.peek()]) {
+                    res[st.peek()] = i - st.peek();
+                    st.pop();
+                }
+                st.push(i);
+            }
+        }
+        return res;
+    }
+
+    /**
      * 151. 反转字符串中的单词
      *
      * @param s
