@@ -15,19 +15,16 @@ public class LeetcodeTest {
      * @return
      */
     public int[] dailyTemperatures(int[] temperatures) {
-        Deque<Integer> st = new LinkedList<>();
-        int[] res = new int[temperatures.length];
+        int n = temperatures.length;
+        int[] res = new int[n];
+        LinkedList<Integer> st = new LinkedList<>();
         st.push(0);
-        for (int i = 1; i < temperatures.length; i++) {
-            if (temperatures[i] <= temperatures[st.peek()]) {
-                st.push(i);
-            } else {
-                while (!st.isEmpty() && temperatures[i] > temperatures[st.peek()]) {
-                    res[st.peek()] = i - st.peek();
-                    st.pop();
-                }
-                st.push(i);
+        for (int i = 1; i < n; i++) {
+            while (!st.isEmpty() && temperatures[i] > temperatures[st.peek()]) {
+                res[st.peek()] = i - st.peek();
+                st.pop();
             }
+            st.push(i);
         }
         return res;
     }
