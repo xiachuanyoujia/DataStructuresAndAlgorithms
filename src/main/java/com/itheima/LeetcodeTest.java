@@ -9,6 +9,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LeetcodeTest {
 
     /**
+     * 42. 接雨水
+     *
+     * @param height
+     * @return
+     */
+    public int trap(int[] height) {
+        int n = height.length;
+        if (n < 2) return 0;
+        int sum = 0;
+        LinkedList<Integer> st = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            while (!st.isEmpty() && height[i] > height[st.peekLast()]) {
+                int mid = st.removeLast();
+                if (st.isEmpty()) break;
+                int l = st.peekLast();
+                int width = i - l - 1;
+                int water = Math.min(height[i], height[l]) - height[mid];
+                sum += width * water;
+            }
+            st.addLast(i);
+        }
+        return sum;
+    }
+
+    /**
      * 739. 每日温度
      *
      * @param temperatures
