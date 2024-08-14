@@ -7,6 +7,33 @@ import java.util.*;
 public class easy {
 
     /**
+     * 88. 合并两个有序数组
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int len1 = m - 1;
+        int len2 = n - 1;
+        int tail = m + n - 1;
+        int temp;
+        while (len1 >= 0 || len2 >= 0) {
+            if (len1 == -1) {
+                temp = nums2[len2--];
+            } else if (len2 == -1) {
+                temp = nums1[len1--];
+            } else if (nums1[len1] > nums2[len2]) {
+                temp = nums1[len1--];
+            } else {
+                temp = nums2[len2--];
+            }
+            nums1[tail--] = temp;
+        }
+    }
+
+    /**
      * 面试题 01.07. 旋转矩阵
      * 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
      * 不占用额外内存空间能否做到？
