@@ -7,6 +7,24 @@ import java.util.*;
 public class easy {
 
     /**
+     * 27. 移除元素
+     *
+     * @param nums
+     * @param val
+     * @return
+     */
+    public int removeElement(int[] nums, int val) {
+        int s = 0;
+        for (int f = 0; f < nums.length; f++) {
+            if (nums[f] != val) {
+                nums[s] = nums[f];
+                s++;
+            }
+        }
+        return s;
+    }
+
+    /**
      * 88. 合并两个有序数组
      *
      * @param nums1
