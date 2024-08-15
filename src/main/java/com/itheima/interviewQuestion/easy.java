@@ -7,6 +7,30 @@ import java.util.*;
 public class easy {
 
     /**
+     * 26. 删除有序数组中的重复项
+     *
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates(int[] nums) {
+        int slow = 0;
+        int fast = 1;
+        while (fast < nums.length) {
+            if (nums[slow] != nums[fast]) {
+                slow++;
+            }
+            nums[slow] = nums[fast];
+            fast++;
+        }
+        return ++slow;
+    }
+
+    @Test
+    public void testRemoveDuplicates() {
+        removeDuplicates(new int[]{1, 1, 2});
+    }
+
+    /**
      * 27. 移除元素
      *
      * @param nums
