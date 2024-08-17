@@ -7,6 +7,32 @@ import java.util.*;
 public class easy {
 
     /**
+     * 189. 轮转数组
+     *
+     * @param nums
+     * @param k
+     */
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k %= n;
+        if (k == 0) return;
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
+    }
+
+    private void reverse(int[] nums, int i, int j) {
+        while (i < j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+
+    /**
      * 80. 删除有序数组中的重复项 II
      *
      * @param nums
